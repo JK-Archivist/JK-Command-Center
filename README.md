@@ -36,21 +36,21 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:3000/api/mission/tasks/l
 ```bash
 TOKEN=$(openssl rand -hex 24)
 mkdir -p ~/.openclaw/credentials
-cat > ~/.openclaw/credentials/mission-control.json <<JSON
+cat > ~/.openclaw/credentials/command-center.json <<JSON
 {
-  "service": "mission-control",
+  "service": "command-center",
   "baseUrl": "http://localhost:3000/api/mission",
   "token": "$TOKEN"
 }
 JSON
 chmod 700 ~/.openclaw/credentials
-chmod 600 ~/.openclaw/credentials/mission-control.json
+chmod 600 ~/.openclaw/credentials/command-center.json
 ```
 
 2) Configure the app with the same token:
 
 ```bash
-echo "MISSION_CONTROL_TOKEN=$TOKEN" > .env.local
+echo "COMMAND_CENTER_TOKEN=$TOKEN" > .env.local
 ```
 
 3) Install and run:

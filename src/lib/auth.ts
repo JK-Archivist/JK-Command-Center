@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export function requireAuth(req: NextRequest): NextResponse | null {
   const header = req.headers.get('authorization') || '';
-  const token = process.env.MISSION_CONTROL_TOKEN;
+  const token = process.env.COMMAND_CENTER_TOKEN || process.env.MISSION_CONTROL_TOKEN; // fallback for older envs
   if (!token) {
     return NextResponse.json({ error: 'Server not configured' }, { status: 500 });
   }
@@ -12,7 +12,7 @@ export function requireAuth(req: NextRequest): NextResponse | null {
 }
 
 export function withCors(res: NextResponse) {
-  const origins = (process.env.MISSION_CONTROL_CORS_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+  const origins = (process.env.COMMAND_CENTER_CORS_ORIGINS || process.env.MISSION_CONTROL_CORS_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
   if (origins.length) {
     res.headers.set('Access-Control-Allow-Origin', origins[0]);
     res.headers.set('Vary', 'Origin');

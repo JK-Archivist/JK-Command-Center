@@ -4,7 +4,9 @@ import path from 'path';
 import process from 'process';
 
 async function loadCreds() {
-  const p = path.join(process.env.HOME || '~', '.openclaw', 'credentials', 'mission-control.json');
+  const p1 = path.join(process.env.HOME || '~', '.openclaw', 'credentials', 'command-center.json');
+  const p2 = path.join(process.env.HOME || '~', '.openclaw', 'credentials', 'mission-control.json');
+  const p = await fs.readFile(p1).then(()=>p1).catch(async()=>p2);
   const raw = await fs.readFile(p, 'utf8');
   return JSON.parse(raw);
 }
