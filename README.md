@@ -130,9 +130,9 @@ node skills/mission-control-bridge/bridge.mjs activity update '{"agentId":"main"
 
 ## Screens
 
-<img src="public/screenshots/tasks.png" width="600" alt="Tasks board" />
+<img src="public/screenshots/tasks-dnd.gif" width="600" alt="Tasks board drag-and-drop" />
 
-<img src="public/screenshots/content.png" width="600" alt="Content pipeline" />
+<img src="public/screenshots/content-dnd.gif" width="600" alt="Content pipeline drag-and-drop" />
 
 <img src="public/screenshots/calendar.png" width="600" alt="Calendar" />
 
