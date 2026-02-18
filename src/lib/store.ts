@@ -14,9 +14,10 @@ async function ensureFile(file: string) {
   }
 }
 
-export type Upsert<T extends { id?: string }> = T & { id?: string };
+export type Upsert<T = any> = T & { id?: string };
 
-export async function upsertItem<T extends { id?: string }>(name: string, item: Upsert<T>): Promise<T & { id: string, updatedAt: string }>{
+// Loosen types for file-backed MVP to avoid TS inference issues in callers
+export async function upsertItem(name: string, item: any): Promise<any>{
   if (USE_CONVEX) {
     console.warn('[store] USE_CONVEX=1 set — falling back to file store (stub).');
     // TODO: wire Convex mutations here; keep API stable
