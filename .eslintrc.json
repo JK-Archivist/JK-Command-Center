@@ -1,0 +1,21 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "react-hooks/set-state-in-effect": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/app/api/**", "src/lib/store.ts"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    {
+      "files": ["src/components/ContentBoard.tsx"],
+      "rules": {
+        "@next/next/no-img-element": "off"
+      }
+    }
+  ]
+}
