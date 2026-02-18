@@ -129,6 +129,13 @@ node skills/mission-control-bridge/bridge.mjs activity update '{"agentId":"main"
 ```
 
 ## Screens
+
+<img src="public/screenshots/tasks.png" width="600" alt="Tasks board" />
+
+<img src="public/screenshots/content.png" width="600" alt="Content pipeline" />
+
+<img src="public/screenshots/calendar.png" width="600" alt="Calendar" />
+
 - /tasks — Kanban with drag‑and‑drop and inline edits
 - /content — pipeline with drag‑and‑drop, script/thumbnail editing
 - /calendar — month grid with per‑day items and quick‑add form
