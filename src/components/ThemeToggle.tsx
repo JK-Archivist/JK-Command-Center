@@ -2,24 +2,20 @@
 import { useEffect, useState } from 'react';
 
 export default function ThemeToggle(){
-  const [theme, setTheme] = useState<string|undefined>(undefined);
+  const [theme, setTheme] = useState<string | undefined>(() => {
+    if (typeof window === 'undefined') return undefined;
+    const saved = localStorage.getItem('mc-theme');
+    if (saved) return saved;
+    const sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return sysDark ? 'dark' : 'light';
+  });
   useEffect(()=>{
-    const saved = localStorage.getItem('mc-theme') as string|null;
-    if (saved){
-      document.documentElement.setAttribute('data-theme', saved);
-      setTheme(saved);
-    } else {
-      // default to dark; respect system on first paint via CSS color-scheme
-      const sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const t = sysDark ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', t);
-      setTheme(t);
-    }
-  },[]);
+    if (!theme) return;
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('mc-theme', theme); } catch {}
+  },[theme]);
   const toggle = ()=>{
     const next = theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('mc-theme', next);
     setTheme(next);
   };
   return (

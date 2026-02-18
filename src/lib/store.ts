@@ -28,7 +28,7 @@ export async function upsertItem(name: string, item: any): Promise<any>{
   const raw = await fs.readFile(file, 'utf8');
   const json = raw ? JSON.parse(raw) : { items: [] };
   const items: any[] = Array.isArray(json.items) ? json.items : [];
-  let id = item.id ?? randomUUID();
+  const id = item.id ?? randomUUID();
   const idx = items.findIndex((x: any) => x.id === id);
   const record = { ...(items[idx] || {}), ...item, id, updatedAt: now };
   if (idx >= 0) items[idx] = record; else items.push(record);

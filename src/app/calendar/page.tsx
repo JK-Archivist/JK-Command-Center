@@ -1,7 +1,6 @@
 import { listItems, upsertItem } from '@/lib/store';
 import { revalidatePath } from 'next/cache';
 
-function fmtDate(iso?: string){ try { return new Date(iso||'').toLocaleDateString(); } catch { return iso||''; } }
 function fmtTime(iso?: string){ try { return new Date(iso||'').toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); } catch { return iso||''; } }
 
 function buildMonthGrid(date = new Date()){
