@@ -1,0 +1,10 @@
+# Node
+node_modules
+.next
+out
+.DS_Store
+.env*
+
+# Local data store
+/data/*.json
+!/data/.gitkeep
