@@ -43,7 +43,7 @@ export default function TaskBoard({ cols, tasks, moveAction, addAction }: Props)
       </form>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {cols.map(col => (
-          <div key={col} className="rounded-md border bg-white" onDragOver={onDragOver} onDrop={(e)=>onDrop(e,col)}>
+          <div key={col} className="rounded-md border bg-white" data-col={col} onDragOver={onDragOver} onDrop={(e)=>onDrop(e,col)}>
             <div className="flex items-center justify-between border-b px-3 py-2 text-sm font-medium capitalize">
               <span>{col}</span>
               <Badge variant={col==='done'?'success':col==='blocked'?'danger':col==='doing'?'info':'muted'}>{groups[col].length}</Badge>
@@ -51,7 +51,7 @@ export default function TaskBoard({ cols, tasks, moveAction, addAction }: Props)
             <div className="p-3 space-y-2 min-h-24">
               {groups[col].length === 0 && <div className="text-slate-400 text-sm">Drop tasks here</div>}
               {groups[col].map(t => (
-                <div key={t.id} draggable onDragStart={(e)=>onDragStart(e, t.id)} className="rounded border p-2 cursor-move bg-white hover:bg-slate-50">
+                <div key={t.id} draggable data-task-id={t.id} onDragStart={(e)=>onDragStart(e, t.id)} className="rounded border p-2 cursor-move bg-white hover:bg-slate-50">
                   <div className="font-medium flex items-center gap-2">{t.title || t.id}
                     {t.assignee && <Badge variant={t.assignee.startsWith('agent')?'info':'muted'}>{t.assignee}</Badge>}
                   </div>

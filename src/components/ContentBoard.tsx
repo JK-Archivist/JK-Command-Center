@@ -42,7 +42,7 @@ export default function ContentBoard({ stages, items, moveAction, addAction }: P
       </form>
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         {stages.map(stage => (
-          <div key={stage} className="rounded-md border bg-white" onDragOver={onDragOver} onDrop={(e)=>onDrop(e,stage)}>
+          <div key={stage} className="rounded-md border bg-white" data-stage={stage} onDragOver={onDragOver} onDrop={(e)=>onDrop(e,stage)}>
             <div className="flex items-center justify-between border-b px-3 py-2 text-sm font-medium capitalize">
               <span>{stage}</span>
               <Badge variant={stage==='publish'?'success':stage==='thumb'?'info':'muted'}>{groups[stage].length}</Badge>
@@ -50,7 +50,7 @@ export default function ContentBoard({ stages, items, moveAction, addAction }: P
             <div className="p-3 space-y-2 min-h-24">
               {groups[stage].length === 0 && <div className="text-slate-400 text-sm">Drop content here</div>}
               {groups[stage].map(c => (
-                <div key={c.id} draggable onDragStart={(e)=>onDragStart(e, c.id)} className="rounded border p-2 cursor-move bg-white hover:bg-slate-50">
+                <div key={c.id} draggable data-content-id={c.id} onDragStart={(e)=>onDragStart(e, c.id)} className="rounded border p-2 cursor-move bg-white hover:bg-slate-50">
                   <div className="font-medium">{c.idea || c.title || c.id}</div>
                   {c.thumbnailUrl && <img src={c.thumbnailUrl} alt="thumb" className="mt-1 rounded max-h-24" />}
                   {c.updatedAt && <div className="text-[11px] text-slate-500">updated {new Date(c.updatedAt).toLocaleString()}</div>}
