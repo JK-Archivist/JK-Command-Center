@@ -2,30 +2,36 @@
 
 /* Design tokens (light default) */
 :root {
-  --bg: #0b0c0e;            /* app background (used in dark by default; ThemeToggle sets data-theme) */
-  --bg-elev: #111317;       /* elevated surfaces */
-  --fg: #e8eaed;            /* primary text */
-  --muted: #9aa0a6;         /* secondary text */
-  --border: #2a2f36;        /* borders */
-  --card: #12141a;          /* cards */
-  --accent: #7c5cff;        /* accent (violet-ish) */
+  /* Dark (brand) defaults; ThemeToggle sets data-theme=light to switch */
+  --bg: #0f0f0f;            /* dark.bg */
+  --bg-elev: #242424;       /* dark.elevated */
+  --fg: #e8eaed;
+  --muted: #9aa0a6;
+  --border: #2a2a2a;        /* dark.border */
+  --border-subtle: #1f1f1f; /* dark.border-subtle */
+  --card: #1a1a1a;          /* dark.surface */
+  --accent: #ec4899;        /* pink-500 */
   --accent-contrast: #ffffff;
+  --accent-secondary: #a855f7; /* purple-500 */
   --success: #22c55e;
   --warning: #f59e0b;
   --danger: #ef4444;
 }
 
-/* Light theme */
+/* Light theme (brand) */
 [data-theme="light"] {
-  --bg: #f7f7fb;
+  --bg: #ffffff;            /* light surface */
   --bg-elev: #ffffff;
   --fg: #0f172a;
   --muted: #64748b;
   --border: #e5e7eb;
+  --border-subtle: #f1f5f9;
   --card: #ffffff;
-  --accent: #6d28d9;
+  --accent: #ec4899;        /* pink-500 */
   --accent-contrast: #ffffff;
+  --accent-secondary: #a855f7; /* purple-500 */
 }
+
 
 /* Prefer system theme on first paint if no saved choice */
 @media (prefers-color-scheme: light) {
@@ -57,7 +63,7 @@ body {
   color: var(--fg); background: var(--bg-elev); border: 1px solid var(--border);
 }
 .btn:hover { box-shadow: 0 1px 6px rgb(0 0 0 / 0.1); }
-.btn-primary { color: var(--accent-contrast); background: var(--accent); border-color: transparent; }
+.btn-primary { color: var(--accent-contrast); background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); border-color: transparent; }
 .badge { @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium; background: var(--bg-elev); color: var(--muted); border: 1px solid var(--border); }
 .badge-info { background: color-mix(in oklab, var(--accent) 18%, var(--bg)); color: var(--accent-contrast); border-color: transparent; }
 .badge-success { background: color-mix(in oklab, var(--success) 22%, var(--bg)); color: #052e13; }
