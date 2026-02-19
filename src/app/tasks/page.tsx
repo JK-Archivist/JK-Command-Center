@@ -22,7 +22,8 @@ export default async function TasksPage() {
     'use server';
     const id = String(formData.get('id') || '');
     const delta = Number(formData.get('delta') || 0);
-    const all = await listItems<any>('tasks');
+    import type { Task } from '@/components/TaskBoard';
+    const all = await listItems<Task>('tasks');
     const t = all.find(x=>x.id===id);
     if (!t) return;
     const col = t.status || 'todo';
@@ -39,7 +40,8 @@ export default async function TasksPage() {
     revalidatePath('/tasks');
   }
 
-  const tasks = await listItems<any>('tasks');
+  import type { Task } from '@/components/TaskBoard';
+  const tasks = await listItems<Task>('tasks');
   const cols = ['todo','doing','done','blocked'];
   return (
     <div className="space-y-4">
