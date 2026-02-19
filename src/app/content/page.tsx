@@ -1,6 +1,7 @@
 import { listItems, upsertItem } from '@/lib/store';
 import { revalidatePath } from 'next/cache';
 import ContentBoard from '@/components/ContentBoard';
+import type { ContentItem } from '@/components/ContentBoard';
 
 export default async function ContentPage() {
   const stages = ['idea','script','thumb','film','publish'] as const;
@@ -19,7 +20,6 @@ export default async function ContentPage() {
     revalidatePath('/content');
   }
 
-  import type { ContentItem } from '@/components/ContentBoard';
   const items = await listItems<ContentItem>('content');
   return (
     <div className="space-y-4">
