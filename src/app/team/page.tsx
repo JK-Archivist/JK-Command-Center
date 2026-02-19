@@ -21,8 +21,10 @@ export default async function TeamPage() {
     revalidatePath('/team');
   }
 
-  const agents = await listItems<any>('agents');
-  const subs = await listItems<any>('subagents');
+  type Agent = { id: string; name?: string; role?: string; responsibilities?: string[] };
+  type Sub = { id: string; parentAgentId: string; name?: string; role?: string };
+  const agents = await listItems<Agent>('agents');
+  const subs = await listItems<Sub>('subagents');
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold">Team</h1>

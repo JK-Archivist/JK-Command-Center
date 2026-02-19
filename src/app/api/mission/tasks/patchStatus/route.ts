@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     if (!body?.id) throw new Error('id required');
     const record = await upsertItem('tasks', body);
     return withCors(NextResponse.json({ ok: true, task: record }));
-  } catch (e: any) {
-    return withCors(NextResponse.json({ ok: false, error: e?.message || 'error' }, { status: 400 }));
+  } catch (e: unknown) {
+    return withCors(NextResponse.json({ ok: false, error: (e instanceof Error ? e.message : 'error') }, { status: 400 }));
   }
 }

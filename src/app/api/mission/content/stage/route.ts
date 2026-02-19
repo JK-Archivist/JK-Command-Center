@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json(); // expects { id, status, ...optional }
     const record = await upsertItem('content', body);
     return withCors(NextResponse.json({ ok: true, content: record }));
-  } catch (e: any) {
-    return withCors(NextResponse.json({ ok: false, error: e?.message || 'error' }, { status: 400 }));
+  } catch (e: unknown) {
+    return withCors(NextResponse.json({ ok: false, error: (e instanceof Error ? e.message : 'error') }, { status: 400 }));
   }
 }

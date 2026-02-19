@@ -12,7 +12,8 @@ export default async function OfficePage() {
     revalidatePath('/office');
   }
 
-  const activity = await listItems<any>('activity');
+  type Activity = { id: string; agentId?: string; status?: 'idle'|'working'|'blocked'; taskRef?: string };
+  const activity = await listItems<Activity>('activity');
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Office</h1>

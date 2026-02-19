@@ -14,7 +14,8 @@ export default async function MemoryPage(props: { searchParams?: Promise<{ q?: s
     revalidatePath('/memory');
   }
 
-  const items = await listItems<any>('memories');
+  type MemoryItem = { id: string; title?: string; contentMarkdown?: string; tags?: string[] };
+  const items = await listItems<MemoryItem>('memories');
   const filtered = q ? items.filter(m => (m.title||'').toLowerCase().includes(q) || (m.contentMarkdown||'').toLowerCase().includes(q)) : items;
   return (
     <div className="space-y-4">

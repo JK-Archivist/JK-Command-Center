@@ -24,12 +24,13 @@ export default async function CalendarPage(props: { searchParams?: Promise<{ m?:
     revalidatePath('/calendar');
   }
 
-  const events = await listItems<any>('events');
+  type CalEvent = { id: string; title?: string; when?: string; kind?: string };
+  const events = await listItems<CalEvent>('events');
   const sp = await props.searchParams;
   const m = sp?.m; // YYYY-MM
   const base = m && /^\d{4}-\d{2}$/.test(m) ? new Date(m + '-01T00:00:00Z') : new Date();
   const { month, year, cells } = buildMonthGrid(base);
-  const byDay: Record<string, any[]> = {};
+  const byDay: Record<string, CalEvent[]> = {};
   for (const e of events){
     const key = (e.when||'').slice(0,10);
     if (!byDay[key]) byDay[key] = []; byDay[key].push(e);
@@ -56,7 +57,7 @@ export default async function CalendarPage(props: { searchParams?: Promise<{ m?:
             <div key={i} className={`min-h-24 card p-2 ${inMonth?'':'opacity-50'}`}>
               <div className="text-[11px] muted">{d.getDate()}</div>
               <div className="mt-1 space-y-1">
-                {dayEvents.map((e:any)=> (
+                {dayEvents.map((e: CalEvent)=> (
                   <div key={e.id} className="rounded bg-slate-100 px-2 py-1">
                     <div className="text-xs font-medium">{e.title}</div>
                     <div className="text-[11px] text-slate-500">{fmtTime(e.when)} • {e.kind||'event'}</div>

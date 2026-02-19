@@ -19,7 +19,8 @@ export default async function ContentPage() {
     revalidatePath('/content');
   }
 
-  const items = await listItems<any>('content');
+  import type { ContentItem } from '@/components/ContentBoard';
+  const items = await listItems<ContentItem>('content');
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Content Pipeline</h1>
